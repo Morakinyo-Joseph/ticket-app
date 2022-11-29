@@ -1,0 +1,63 @@
+{% extends 'core/home.html' %}
+
+{% block content %}
+
+<style type="text/css">
+    .btn{
+        /* margin-right: 400px; */
+    }
+    form{
+        /* border: 1px solid black; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+    form input[type=text]{
+        width: 50%;
+    }
+    form input[type=password]{
+        width: 50%;
+    }
+    .messages{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>
+
+<div class="messages">
+    {% for message in messages %}
+        {% if message.message == "Logged out successfully" %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% else %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<form method="post">
+
+    <h1>Login<hr></h1>
+    
+
+    {% csrf_token %}
+    <input type="text", name="username", placeholder="Username" class="textinput textInput form-control">
+    <br>
+    <input type="password", name="password", placeholder="Password", class="textinput textInput form-control">
+    <br>
+
+    <div class="btn">
+        <input type="submit", value="Login", class="btn btn-success">
+    </div>
+
+    <span>
+        Don't have an account? click <a href="{% url 'core:signup' %}">here</a>
+    </span>
+</form>
+
+{% endblock content %}

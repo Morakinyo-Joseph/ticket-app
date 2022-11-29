@@ -1,0 +1,93 @@
+{% extends 'core/home.html' %}
+
+{% block content %}
+
+<style type="text/css">
+    .page{
+        /* border: 1px solid blue; */
+
+    }
+    form{
+        /* border: 1px solid black; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    form input[type=text]{
+        width: 50%;
+    }
+    form input[type=email]{
+        width: 50%;
+    }
+    form input[type=password]{
+        width: 50%;
+    }
+    .name{
+        display: flex;
+        width: 50%;
+        
+    }
+    .pin    {
+        display: flex;
+        width: 50%;
+    }
+    .extra-data{
+        display: flex;
+        width: 50%;
+    }
+    .messages{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .topic{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>
+
+
+<div class="page">
+
+    <h1 class="topic">Signup <hr> </h1>
+    <hr>
+
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        <div class="name">
+            <input type="text", name="first_name", placeholder="First Name" class="form-control">
+            <input type="text", name="last_name", placeholder="Last Name", class="form-control">
+        </div>
+        <br>
+
+        <input type="text", name="instagram_handle", placeholder="Instagram handle", class="form-control">
+        <br>
+        <input type="email", name="email", placeholder="Email Address", class="form-control">
+
+        <br>
+    
+        <input type="password", name="pass1", placeholder="Password", class="form-control">
+        <br>
+        <input type="password", name="pass2", placeholder="Confirm Password", class="form-control">
+
+        <br>
+        <input type="submit", value="Sign up", class="btn btn-success"><br>
+        <span>Already have an account? click <a href="{% url 'core:login' %}">here</a></span>
+    </form>
+
+</div>
+
+
+{% endblock content %}

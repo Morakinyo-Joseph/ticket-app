@@ -1,0 +1,41 @@
+{% extends 'core/home.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="messages">
+    {% for message in messages %}
+        {% if message.message == "Game posted successfully" %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% elif message.message == "logged in successful" %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% else %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+{% if request.user.is_staff %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form | crispy }}
+        <br>
+        <input type="submit", class="btn btn-success">
+    </form>
+
+{% else %}
+
+    <h1>Nothing to show 😭</h1>
+
+{% endif %}
+
+{% endblock content %}

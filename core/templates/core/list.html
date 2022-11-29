@@ -1,0 +1,35 @@
+{% extends 'core/home.html' %}
+
+{% block content %}
+
+
+{% if void %}
+    <h1>Nothing to show 😭</h1>
+{% endif %}
+
+{% if request.user.is_staff %}
+
+    {% for g in game %}
+        <div class="alert alert-warning" role="alert">
+            <a href="{% url 'core:delete' g.id %}" style="text-decoration: none; color: black;" >
+                <div class="game_list">
+                    <div class="id" style="font-size: 30px;">
+                        {{ g.ticket_ID }}
+                    </div>
+                    <div class="date">
+                        {% if g.date_created.date == current_date.date %}
+                        Time Posted: Today        
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    {% endfor %}
+
+{% else %}
+    <h1>Nothing to show 😭</h1>
+{% endif %}
+
+
+{% endblock %}
